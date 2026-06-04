@@ -67,7 +67,7 @@ This project was originally built during my bachelor's degree. When revisiting i
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/smart-department.git
+git clone https://github.com/Chithranjaly/smart-department.git
 cd smart-department
 
 # 2. Create and activate a virtual environment
