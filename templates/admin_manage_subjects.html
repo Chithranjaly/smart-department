@@ -1,0 +1,72 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+<center>
+		<form method="post">
+			{% if data['up_sub'] %}
+		<h1>UPDATE SUBJECTS</h1>
+	<table class="table">
+		<tr>
+			<th>Select batch name</th>
+			<td><select name="bname" required="">
+				<option value="{{ data['up_sub'][0]['batch_id']}}">{{ data['up_sub'][0]['batch_name']}}</option>
+				{% for row in data['bnames'] %}
+				<option value="{{ row['batch_id']}}">{{ row['batch_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Subject Name</th>
+			<td><input type="text" required="" value="{{ data['up_sub'][0]['subject_name']}}" name="sname"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="submitted" value="Update"></td>
+		</tr>
+		
+	</table>
+</form>
+{% else %}
+	<form method="post">
+		<h1>MANAGE SUBJECTS</h1>
+	<table class="table">
+		<tr>
+			<th>Select batch name</th>
+			<td><select name="bname" required="">
+				{% for row in data['bnames'] %}
+				<option value="{{ row['batch_id']}}">{{ row['batch_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Subject Name</th>
+			<td><input type="text" required="" name="sname"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="submit" value="ADD"></td>
+		</tr>
+		
+	</table>
+</form>
+{% endif %}
+<h1>View Subjects</h1>
+<table class="table">
+	<tr>
+		<th>Sl.No</th><th>Subject</th><th>Batch</th>
+	</tr>
+	{% for row in data['sub'] %}
+	<tr>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['subject_name'] }}</td>
+		<td>{{ row['batch_name'] }}</td>
+		<td><a href="?action=delete&ids={{ row['subject_id']}}"  class="btn btn-danger">Delete</a></td>
+		<td><a href="?action=update&ids={{ row['subject_id']}}" class="btn btn-info">Update</a></td>
+
+	</tr>
+	{% endfor %}
+	
+</table>
+</center>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

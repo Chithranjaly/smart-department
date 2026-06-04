@@ -1,0 +1,115 @@
+{% include 'admin_header.html' %}
+{% include 'temp_header.html' %}
+
+<center>
+	{% if data['up_tt'] %}
+	{% for row in data['batchh'] %}
+	<h1>UPDATE TIMETABLE FOR {{row['batch_name']}} </h1>
+	{% endfor %}
+	<form method="post">
+	<table class="table">
+			
+				<th>Select a Day</th>
+				<td><select name="day" required="">
+					<option value="{{data['up_tt'][0]['day']}}">{{data['up_tt'][0]['day']}}</option>
+					 <option value="Monday">Monday</option>
+					 <option value="Tuesday">Tuesday</option>
+					 <option value="Wednesday">Wednesday</option>
+					 <option value="Thursday">Thursday</option>
+					 <option value="Friday">Friday</option>
+					 <option value="Saturday">Saturday</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>Select subject</th>
+				<td><select name="subject" required="">
+					<option value="{{data['up_tt'][0]['subject_id']}}">{{data['up_tt'][0]['subject_name']}}</option>
+					 {% for row in data['subj_tt']%}
+					<option value="{{ row['subject_id']}}">{{ row['subject_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Select hour</th>
+				<td><select name="hour" required="">
+					<option value="{{data['up_tt'][0]['session']}}">{{data['up_tt'][0]['session']}}</option>
+					<option value="First Hour">First Hour</option>
+					<option value="Second Hour">Second Hour</option>
+					<option value="Third Hour">Third Hour</option>
+					<option value="Fourth Hour">Fourth Hour</option>
+					<option value="Fifth Hour">Fifth Hour</option>
+					<option value="Sixth Hour">Sixth Hour</option>
+					<option value="Seventh Hour">Seventh Hour</option>
+					<option value="Eighth Hour">Eighth Hour</option>
+				</select></td>
+			</tr>
+			
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="Update" name="submitte"></td>
+			</tr>
+		</table>
+		</form>
+		{% else %}
+	{% for row in data['batchh'] %}
+	<h1>MANAGE TIMETABLE FOR {{row['batch_name']}} </h1>
+	{% endfor %}
+	<form method="post">
+	<table class="table">
+			
+				<th>Select a Day</th>
+				<td><select name="day" required="">
+					 <option value="Monday">Monday</option>
+					 <option value="Tuesday">Tuesday</option>
+					 <option value="Wednesday">Wednesday</option>
+					 <option value="Thursday">Thursday</option>
+					 <option value="Friday">Friday</option>
+					 <option value="Saturday">Saturday</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>Select subject</th>
+				<td><select name="subject" required="">
+					 {% for row in data['subj_tt']%}
+					<option value="{{ row['subject_id']}}">{{ row['subject_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Select hour</th>
+				<td><select name="hour" required="">
+					<option value="First Hour">First Hour</option>
+					<option value="Second Hour">Second Hour</option>
+					<option value="Third Hour">Third Hour</option>
+					<option value="Fourth Hour">Fourth Hour</option>
+					<option value="Fifth Hour">Fifth Hour</option>
+					<option value="Sixth Hour">Sixth Hour</option>
+					<option value="Seventh Hour">Seventh Hour</option>
+					<option value="Eighth Hour">Eighth Hour</option>
+				</select></td>
+			</tr>
+			
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="Select" name="submit"></td>
+			</tr>
+		</table>
+		</form>
+		{% endif %}
+		<h1>View Timetable</h1>
+		<table class="table">
+			<tr>
+				<th>Sl.No</th><th>Day</th><th>Subject</th><th>Hour</th>
+			</tr>
+			 {% for row in data['tt'] %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['day'] }}</td>
+				<td>{{ row['subject_name'] }}</td>
+				<td>{{ row['session'] }}</td>
+				<td><a href="?action=delete&ids={{ row['table_id'] }}" class="btn btn-danger">Delete</a></td>
+				<td><a href="?action=update&ids={{ row['table_id'] }}" class="btn btn-info">Update</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+</center>
+{% include 'temp_footer.html' %}
+{% include 'footer.html' %}

@@ -1,0 +1,76 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upnoti'] %}
+
+
+		<h1>UPDATE NOTIFICATION</h1>
+		<table class="table">
+			<tr>
+				<th>Title</th>
+				<td><input type="text" class="form-control" required="" name="tname" value="{{ data['upnoti'][0]['title'] }}"></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><textarea name="desct" required="" class="form-control">{{ data['upnoti'][0]['description'] }}</textarea></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>MANAGE NOTIFICATIONS</h1>
+		<table class="table">
+
+			<tr>
+				<th>Title</th>
+				<td><input type="text" class="form-control" required name="tname"></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><textarea name="desct" class="form-control"></textarea></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add"  name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>BATCHES</h1>
+		<table class="table">
+			<tr>
+				<th>Sl.no</th>
+				<th>Title name</th>
+				<th>Description</th>
+			</tr>
+
+			{%  for row in data['notification'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['title'] }}</td>
+				<td>{{ row['description'] }}</td>
+				<td><a href="?action=update&bid={{ row['notification_id'] }}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=delete&bid={{ row['notification_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,138 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+<form method="post">
+	<center>
+
+		{% if data['upatt'] %}
+
+
+		<h1>ATTENDANCE</h1>
+		<table class="table">
+			<tr>
+				<th>Students</th>
+				<td><select name="sid">
+
+					<option value="{{ data['upatt'][0]['student_id'] }}">{{ data['upatt'][0]['s_name'] }}</option>
+
+					{% for row in data['students'] %}
+					
+					<option value="{{ row['student_id'] }}">{{ row['student_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Attendance date</th>
+				<td><input type="date" value="{{ data['upatt'][0]['att_date'] }}" required name="adate"></td>
+			</tr>
+			<tr>
+				<th>Attendance hour</th>
+				<td><input type="text" value="{{ data['upatt'][0]['att_hour'] }}" required name="aclass"></td>
+			</tr>
+			<tr>
+				<th>Status</th>
+				<td><select name="astatus">
+					
+					<option>{{ data['upatt'][0]['att_status'] }}</option>
+					<option value="present">present</option>
+					<option value="absent">absent</option>
+
+				</select></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+
+		<h1>ATTENDANCE</h1>
+		<table class="table">
+			<tr>
+				<th>Students</th>
+				<td><select name="sid">
+
+					<option hidden>--choose--</option>
+
+					{% for row in data['students'] %}
+					
+					<option value="{{ row['student_id'] }}">{{ row['student_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Attendance date</th>
+				<td><input type="date" required name="adate"></td>
+			</tr>
+			<tr>
+				<th>Attendance hour</th>
+				<td><select name="aclass">
+					<option hidden="">--select--</option>
+					<option value="1st hour">1st hour</option>
+					<option value="2nd hour">2nd hour</option>
+					<option value="3rd hour">3rd hour</option>
+					<option value="4th hour">4th hour</option>
+					<option value="5th hour">5th hour</option>
+					<option value="6th hour">6th hour</option>
+					<option value="7th hour">7th hour</option>
+					<option value="8th hour">8th hour</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>Status</th>
+				<td><select name="astatus">
+					
+					<option>--choose--</option>
+					<option value="present">present</option>
+					<option value="absent">absent</option>
+
+				</select></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="ADD" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>VIEW ATTENDANCE</h1>
+		<table class="table">
+				<th>Sno</th>
+				<th>Student name</th>
+				<th>Attendance date</th>
+				<th>Attendance hour</th>
+				<th>Attendance status</th>
+			</tr>
+
+			{% for row in data['attendance'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['sname'] }}</td>
+				<td>{{ row['att_date'] }}</td>
+				<td>{{ row['att_hour'] }}</td>
+				<td>{{ row['att_status'] }}</td>
+				<td><a href="?action=update&aid={{ row['att_id'] }}" class="btn btn-primary">Update</a></td>
+				<td><a href="?action=delete&aid={{ row['att_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+	
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

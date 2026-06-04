@@ -1,0 +1,76 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post" enctype="multipart/form-data">
+	<center>
+
+		{% if data['upmat'] %}
+
+
+		<h1>UPDATE STUDY MATERIALS</h1>
+		<table class="table">
+			<tr>
+				<th>Title</th>
+				<td><input type="text" value="{{ data['upmat'][0]['title'] }}" required name="title"></td>
+			</tr>
+			<tr>
+				<th>Material</th>
+				<td><input type="file" required name="material"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>ADD STUDY MATERIALS</h1>
+		<table class="table">
+			<tr>
+				<th>Title</th>
+				<td><input type="text" required name="title"></td>
+			</tr>
+			<tr>
+				<th>Material</th>
+				<td><input type="file" required name="material"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>MATERIALS</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Title</th>
+				<th>Material</th>
+			</tr>
+
+			{% for row in data['materials'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['title'] }}</td>
+				<td><img src="/{{ row['material_path'] }}" width="100" height="100"></td>
+				<td><a href="?action=update&mid={{ row['material_id'] }}" class="btn btn-primary">Update</a></td>
+				<td><a href="?action=delete&mid={{ row['material_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

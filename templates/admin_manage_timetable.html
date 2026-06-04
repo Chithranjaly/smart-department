@@ -1,0 +1,24 @@
+{% include 'admin_header.html' %}
+{% include 'temp_header.html' %}
+
+<center>
+	<form method="post">
+	<h1>MANAGE TIMETABLE</h1>
+	<table class="table">
+			
+				<th>Select a Batch</th>
+				<td><select name="bname">
+					 {% for row in data['batchess'] %}
+					<option value="{{ row['batch_id']}}">{{ row['batch_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="Select" name="submit"></td>
+			</tr>
+		</table>
+		</form>
+</center>
+{% include 'temp_footer.html' %}
+{% include 'footer.html' %}

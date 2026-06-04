@@ -1,0 +1,97 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+<form method="post">
+	<center>
+
+		{% if data['upfees'] %}
+
+
+		<h1>UPDATE FEES</h1>
+		<table class="table">
+			<tr>
+				<th>Fee amount</th>
+				<td><input type="text" required name="famount" value="{{ data['upfees'][0]['fee_amount'] }}"></td>
+			</tr>
+			<tr>
+				<th>Batch name</th>
+				<td><select name="cname">
+					<option value="{{ data['upfees'][0]['course_name'] }}">{{ data['upfees'][0]['batch_name'] }}</option>
+					 {% for row in data['batchu'] %}
+					<option value="{{ row['batch_id']}}">{{ row['batch_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Due date</th>
+				<td><input type="date" required name="ddate" value="{{ data['upfees'][0]['due_date'] }}"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>MANAGE FEES</h1>
+		<table class="table">
+			<tr>
+				<th>Fee amount</th>
+				<td><input type="text" required name="famount"></td>
+			</tr>
+			<tr>
+				<th>Batch name</th>
+				<td><select name="cname">
+					 {% for row in data['batchu'] %}
+					<option value="{{ row['batch_id']}}">{{ row['batch_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Due date</th>
+				<td><input type="date" required name="ddate"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>FEES</h1>
+		
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Fee amount</th>
+				<th>Course Name</th>
+				<th>Due date</th>
+			</tr>
+
+			{% for row in data['fees'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['fee_amount'] }}</td>
+				<td>{{ row['batch_name'] }}</td>
+				<td>{{ row['due_date'] }}</td>
+				<td><a href="?action=update&fid={{ row['fee_id'] }}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=delete&fid={{ row['fee_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+			
+		</table>
+
+		
+
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

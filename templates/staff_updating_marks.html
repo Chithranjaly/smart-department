@@ -1,0 +1,134 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upmark'] %}
+
+
+				<h1>UPDATE MARKS</h1>
+
+		<table class="table">
+			<tr>
+				<th>Exam</th>
+				<td><select name="exam">
+					<option value="{{ data['upmark'][0]['exam_id'] }}">{{ data['upmark'][0]['subject_name'] }}</option>
+					{% for row in data['exams'] %}
+					<option value="{{ row['exam_id'] }}">{{ row['subject_name'] }}</option>
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Student</th>
+				<td><select name="student">
+
+					<option value="{{ data['upmark'][0]['student_id'] }}">{{ data['upmark'][0]['student_name'] }}</option>
+
+					{% for row in data['students'] %}
+					
+					<option value="{{ row['student_id'] }}">{{ row['student_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Internal mark</th>
+				<td><input type="text" required name="imark" value="{{ data['upmark'][0]['internal_mark'] }}"></td>
+			</tr>
+
+			<tr>
+				<th>Mark awarded</th>
+				<td><input type="text" required name="mawarded" value="{{ data['upmark'][0]['mark_awarded'] }}"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+
+		</table>
+
+		{% else %}
+
+		<h1>MARKS </h1>
+		<table class="table">
+			<tr>
+				<th>Exam</th>
+				<td><select name="exam">
+					<option hidden>--select--</option>
+					{% for row in data['exam_details'] %}
+					<option value="{{ row['exam_id'] }}">{{ row['examm'] }}</option>
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Student</th>
+				<td><select name="student">
+
+					<option hidden>--select--</option>
+
+					{% for row in data['students'] %}
+					
+					<option value="{{ row['student_id'] }}">{{ row['student_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>Internal mark</th>
+				<td><input type="text" required name="imark"></td>
+			</tr>
+
+			<tr>
+				<th>Mark awarded</th>
+				<td><input type="text" required name="mawarded"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add" name="submit"></td>
+			</tr>
+
+		</table>
+
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>UPDATE MARKS</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Exam</th>
+				<th>Student</th>
+				<th>Internal mark</th>
+				<th>Marks awarded</th>
+			</tr>
+
+			{% for row in data['marks'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['examm'] }}</td>
+				<td>{{ row['student_name'] }}</td>
+				<td>{{ row['internal_mark'] }}</td>
+				<td>{{ row['mark_awarded'] }}</td>
+				<td><a href="?action=update&mid={{ row['mark_id'] }}" class="btn btn-primary">Update</a></td>
+				<td><a href="?action=delete&mid={{ row['mark_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

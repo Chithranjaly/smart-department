@@ -1,0 +1,33 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+<center>
+	<h1>VIEW MARK REPORT</h1>
+	<table class="table">
+		<tr>
+			<th>Sno</th>
+			<th>Student name</th>
+			<th>Exam type</th>
+			<th>Internal mark</th>
+			<th>Mark awarded</th>
+		</tr>
+
+		{% for row in data['marklist'] %}
+
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['student_name'] }}</td>
+			<td>{{ row['exam_type'] }}</td>
+			<td>{{ row['internal_mark'] }}</td>
+			<td>{{ row['mark_awarded'] }}</td>
+		</tr>
+
+		{% endfor %}
+
+	</table>
+</center>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

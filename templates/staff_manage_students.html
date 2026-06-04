@@ -1,0 +1,192 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upstud'] %}
+
+
+		<h1>UPDATE STUDENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Parent</th>
+				<td><select name="parent" class="form-control">
+
+					<option value="{{ data['upstud'][0]['parent_id'] }}">{{ data['upstud'][0]['parent_name'] }}</option>
+
+					{% for row in data['parent'] %}
+
+					<option value="{{ row['parent_id'] }}">{{ row['parent_name'] }}</option>
+
+					{% endfor %}
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>Batch</th>
+				<td><select name="batch" class="form-control">
+
+					<option value="{{ data['upstud'][0]['batch_id '] }}">{{ data['upstud'][0]['batch_name'] }}</option>
+
+					{% for row in data['batch'] %}
+
+					<option value="{{ row['batch_id'] }}">{{ row['batch_name'] }}</option>
+
+					{% endfor %}
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" class="form-control" required name="fname" value="{{ data['upstud'][0]['first_name'] }}"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" class="form-control" required name="lname" value="{{ data['upstud'][0]['last_name'] }}"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" required name="gender" value="male">Male
+					<input type="radio" required name="gender" value="female">Female</td>
+			</tr>
+			<tr>
+				<th>DOB</th>
+				<td><input type="date" class="form-control" required name="dob" value="{{ data['upstud'][0]['dob'] }}"></td>
+			</tr>
+			
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" required name="phone" value="{{ data['upstud'][0]['phone'] }}"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required name="email" value="{{ data['upstud'][0]['email'] }}"></td>
+			</tr>
+		
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+
+		{% else %}
+
+		<h1>MANAGE STUDENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Parent</th>
+				<td><select name="parent" class="form-control">
+
+					<option hidden>--select--</option>
+
+					{% for row in data['parent'] %}
+
+					<option value="{{ row['parent_id'] }}">{{ row['parent_name'] }}</option>
+
+					{% endfor %}
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>Batch</th>
+				<td><select name="batch" class="form-control">
+
+					<option hidden>--select--</option>
+
+					{% for row in data['batch'] %}
+
+					<option value="{{ row['batch_id'] }}">{{ row['batch_name'] }}</option>
+
+					{% endfor %}
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" required name="gender" value="male">Male
+					<input type="radio" required name="gender" value="female">Female</td>
+			</tr>
+			<tr>
+				<th>DOB</th>
+				<td><input type="date" class="form-control" required name="dob"></td>
+			</tr>
+		
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td><input type="text" class="form-control" required name="uname"></td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td><input type="password" class="form-control" required name="pword"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="register" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>STUDENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Parent name</th>
+				<th>Batch name</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Gender</th>
+				<th>D.O.B</th>
+				<th>Phone</th>
+				<th>Email</th>
+			</tr>
+
+			{% for row in data['students'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['parent_name'] }}</td>
+				<td>{{ row['batch_name'] }}</td>
+				<td>{{ row['sfname'] }}</td>
+				<td>{{ row['slname'] }}</td>
+				<td>{{ row['gender'] }}</td>
+				<td>{{ row['dob'] }}</td>
+				<td>{{ row['sphone'] }}</td>
+				<td>{{ row['semail'] }}</td>
+				<td><a href="?action=update&sid={{ row['student_id'] }}" class="btn btn-primary">Update</a></td>
+				<td><a href="?action=delete&sid={{ row['student_id'] }}&lid={{ row['slid'] }}" class="btn btn-danger">Delete</a></td>
+
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+	
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

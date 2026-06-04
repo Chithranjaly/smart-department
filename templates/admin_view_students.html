@@ -1,0 +1,49 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<center>
+	<h1>VIEW STUDENTS</h1>
+	<table class="table" style="width: 500px;">
+		<tr>
+			<th>Sno</th>
+			<!-- <th>Batch</th> -->
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Gender</th>
+			<th>DOB</th>
+			<th>Phone</th>
+			<th>Email</th>
+			<th>Parent name</th>
+		</tr>
+
+		{% for row in data['students'] %}
+
+		<tr>
+			<td>{{ loop.index }}</td>
+			<!-- <td>{{ row['batch_name'] }}</td> -->
+			<td>{{ row['sfname'] }}</td>
+			<td>{{ row['slname'] }}</td>
+			<td>{{ row['gender'] }}</td>
+			<td>{{ row['dob'] }}</td>
+			<td>{{ row['phone'] }}</td>
+			<td>{{ row['email'] }}</td>
+			<td>{{ row['parent_name'] }}</td>
+			<td><a href="admin_view_marklist?sid={{ row['student_id'] }}">Mark list</a></td>
+			<td><a href="admin_view_attendance?sid={{ row['student_id'] }}">Attendance</a></td>
+		</tr>
+
+		{% endfor %}
+
+	</table>
+	<table>
+		<tr>
+			<td><a href="admin_view_students1"><input type="button" value="Go Back"></a></td>
+		</tr>
+	</table>
+</center>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

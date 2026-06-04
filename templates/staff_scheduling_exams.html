@@ -1,0 +1,128 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upexams'] %}
+
+
+		<h1>UPDATE EXAMS</h1>
+		<table class="table">
+			
+			<tr>
+				<th>Subject name</th>
+				<td><select name="esubject">
+					<option value="{{ data['upexams'][0]['subject_id']}}">{{ data['upexams'][0]['subject_name']}}</option>					
+					 {% for row in data['sub_exam']%}
+					<option value="{{ row['subject_id']}}">{{ row['subject_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Exam type</th>
+				<td><select name="etype">
+					<option value="{{ data['upexams'][0]['exam_type']}}">{{ data['upexams'][0]['exam_type']}}</option>
+					<option value="1st Internal">1st Internal</option>
+					<option value="2nd Internal">2nd Internal</option>
+					<option value="Class test">Class test</option>
+					<option value="Practical">Practical</option>
+					
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>Exam date</th>
+				<td><input type="date" required name="edate" value="{{ data['upexams'][0]['exam_date'] }}"></td>
+			</tr>
+			<tr>
+				<th>Exam time</th>
+				<td><input type="time" required name="etime" value="{{ data['upexams'][0]['exam_time'] }}"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>SCHEDULE EXAMS</h1>
+		<table class="table">
+			
+			<tr>
+				<th>Subject name</th>
+				<td><select name="esubject">
+					<option hidden>--select--</option>
+					 {% for row in data['sub_exam']%}
+					<option value="{{ row['subject_id']}}">{{ row['subject_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Exam type</th>
+				<td><select name="etype">
+					<option hidden>--select--</option>
+					<option value="1st Internal">1st Internal</option>
+					<option value="2nd Internal">2nd Internal</option>
+					<option value="Class test">Class test</option>
+					<option value="Practical">Practical</option>
+					
+					
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>Exam date</th>
+				<td><input type="date" required name="edate"></td>
+			</tr>
+			<tr>
+				<th>Exam time</th>
+				<td><input type="time" required name="etime"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="schedule" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>EXAMS</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Course name</th>
+				<th>Subject name</th>
+				<th>Exam type</th>
+				<th>Exam date</th>
+				<th>Exam time</th>
+			</tr>
+
+			{% for row in data['exams'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['batch_name'] }}</td>
+				<td>{{ row['subject_name'] }}</td>
+				<td>{{ row['exam_type'] }}</td>
+				<td>{{ row['exam_date'] }}</td>
+				<td>{{ row['exam_time'] }}</td>
+				<td><a href="?action=update&eid={{ row['exam_id'] }}" class="btn btn-primary">Update</td>
+				<td><a href="?action=delete&eid={{ row['exam_id'] }}" class="btn btn-danger">Delete</td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+		<a href="staff_scheduling_exams1" align="center"><input type="button" value="GO BACK"></a>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,137 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+<form method="post">
+
+	<center>
+
+		{% if data['upstaff'] %}
+
+
+		<h1>UPDATE STAFF</h1>
+		<table class="table">
+			<tr>
+				<th>Batch name</th>
+				<td><select name="bid" class="form-control">
+
+					{% for row in data['batches'] %}
+					
+					<option value="{{ data['upstaff'][0]['batch_id'] }}">{{ data['upstaff'][0]['batch_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" required name="fname" class="form-control" value="{{ data['upstaff'][0]['first_name'] }}"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" required name="lname" class="form-control" value="{{ data['upstaff'][0]['last_name'] }}"></td>
+			</tr>
+			<tr>
+				<th>Qualification</th>
+				<td><input type="text" required name="quali" class="form-control" value="{{ data['upstaff'][0]['qualification'] }}"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" required name="phone" class="form-control" value="{{ data['upstaff'][0]['phone'] }}"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" required name="email" class="form-control" value="{{ data['upstaff'][0]['email'] }}"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>MANAGE STAFF</h1>
+		<table class="table">
+			<tr>
+				<th>Batch name</th>
+				<td><select name="bid" class="form-control">
+
+					{% for row in data['batches'] %}
+					
+					<option value="{{ row['batch_id'] }}">{{ row['batch_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>Qualification</th>
+				<td><input type="text" class="form-control" required name="quali"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td><input type="text" class="form-control" required name="uname"></td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td><input type="password" class="form-control" required name="pword"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="register" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+		<br>
+		<br>
+		<h1>STAFF</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Qualification</th>
+				<th>Phone</th>
+				<th>Email</th>
+			</tr>
+
+			{% for row in data['staff'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{ row['last_name'] }}</td>
+				<td>{{ row['qualification'] }}</td>
+				<td>{{ row['phone'] }}</td>
+				<td>{{ row['email'] }}</td>
+				<td><a href="?action=update&sid={{ row['staff_id'] }}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=delete&sid={{ row['staff_id'] }}&lid={{ row['login_id'] }}" class="btn btn-danger">Delete</a></td>
+
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}

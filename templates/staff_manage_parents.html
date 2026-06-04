@@ -1,0 +1,166 @@
+{% include 'staff_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upparent'] %}
+
+
+		<h1>UPDATE PARENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Relation with student</th>
+				<td><select name="relation" class="form-control">
+
+					<option hidden>{{ data['upparent'][0]['relation_with_student'] }}</option>
+					<option value="Father">Father</option>
+					<option value="Mother">Mother</option>
+					<option value="Brother">Brother</option>
+					<option value="Sister">Sister</option>
+					<option value="Guardian">Guardian</option>
+					<option value="Other">Other</option>
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['first_name'] }}" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['last_name'] }}" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>House name</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['house_name'] }}" required name="hname"></td>
+			</tr>
+			<tr>
+				<th>Place</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['place'] }}" required name="place"></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['pincode'] }}" required name="pin"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" value="{{ data['upparent'][0]['phone'] }}" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" value="{{ data['upparent'][0]['email'] }}" required name="email"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" class="btn btn-primary" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>MANAGE PARENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Relation with student</th>
+				<td><select name="relation" class="form-control">
+
+					<option hidden>--select--</option>
+					<option value="Father">Father</option>
+					<option value="Mother">Mother</option>
+					<option value="Brother">Brother</option>
+					<option value="Sister">Sister</option>
+					<option value="Guardian">Guardian</option>
+					<option value="Other">Other</option>
+					
+				</select></td>
+			</tr>
+			<tr>
+				<th>First name</th>
+				<td><input type="text" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><input type="text" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>House name</th>
+				<td><input type="text" class="form-control" required name="hname"></td>
+			</tr>
+			<tr>
+				<th>Place</th>
+				<td><input type="text" class="form-control" required name="place"></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" class="form-control" required name="pin"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td><input type="text" class="form-control" required name="uname"></td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td><input type="password" class="form-control" required name="pword"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" class="btn btn-primary" value="register" name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>PARENTS</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Relation</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>House name</th>
+				<th>Place</th>
+				<th>Pincode</th>
+				<th>Phone number</th>
+				<th>Email</th>
+			</tr>
+
+			{% for row in data['parents'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['relation_with_student'] }}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{ row['last_name'] }}</td>
+				<td>{{ row['house_name'] }}</td>
+				<td>{{ row['place'] }}</td>
+				<td>{{ row['pincode'] }}</td>
+				<td>{{ row['phone'] }}</td>
+				<td>{{ row['email'] }}</td>
+				<td><a href="?action=update&pid={{ row['parent_id'] }}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=delete&pid={{ row['parent_id'] }}&lid={{ row['login_id'] }}" class="btn btn-danger">Delete</a></td>
+
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+	
+</form>
+
+{% include 'temp_footer.html' %}
+
+
+{% include 'footer.html' %}

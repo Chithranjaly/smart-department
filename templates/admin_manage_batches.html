@@ -1,0 +1,87 @@
+{% include 'admin_header.html' %}
+
+{% include 'temp_header.html' %}
+
+
+<form method="post">
+	<center>
+
+		{% if data['upbatch'] %}
+
+
+		<h1>UPDATE BATCHES</h1>
+		<table class="table">
+			<tr>
+				<th>Batch name</th>
+				<td><input type="text" class="form-control" required="" name="bname" value="{{ data['upbatch'][0]['batch_name'] }}"></td>
+			</tr>
+			<tr>
+				<th>Batch Description</th>
+				<td><textarea name="desc" required="" class="form-control">{{ data['upbatch'][0]['batch_description'] }}</textarea></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="update" name="submits"></td>
+			</tr>
+		</table>
+
+		{% else %}
+
+		<h1>MANAGE BATCHES</h1>
+		<table class="table">
+			<!-- <tr>
+				<th>Department</th>
+				<td><select name="did">
+
+					{% for row in data['dept'] %}
+					
+					<option value="{{ row['department_id'] }}">{{ row['department_name'] }}</option>
+
+					{% endfor %}
+
+				</select></td>
+			</tr> -->
+			<tr>
+				<th>Batch name</th>
+				<td><input type="text" class="form-control" required name="bname"></td>
+			</tr>
+			<tr>
+				<th>Batch Description</th>
+				<td><textarea name="desc" class="form-control"></textarea></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><input type="submit" value="add"  name="submit"></td>
+			</tr>
+		</table>
+
+		{% endif %}
+
+
+		<br>
+		<br>
+		<h1>BATCHES</h1>
+		<table class="table">
+			<tr>
+				<th>Sno</th>
+				<th>Batch name</th>
+				<th>Description</th>
+			</tr>
+
+			{%  for row in data['batches'] %}
+
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ row['batch_name'] }}</td>
+				<td>{{ row['batch_description'] }}</td>
+				<td><a href="?action=update&bid={{ row['batch_id'] }}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=delete&bid={{ row['batch_id'] }}" class="btn btn-danger">Delete</a></td>
+			</tr>
+
+			{% endfor %}
+
+		</table>
+	</center>
+</form>
+
+{% include 'temp_footer.html' %}
+
+{% include 'footer.html' %}
