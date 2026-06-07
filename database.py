@@ -25,12 +25,13 @@ def select(query, params=None):
 
 
 def insert(query, params=None):
-    """Execute an INSERT and return the new row's id."""
+    """Execute an INSERT and return the new row's primary key."""
     con = get_connection()
     cur = con.cursor()
-    # RETURNING id is the PostgreSQL way — replaces MySQL's lastrowid
-    cur.execute(query + " RETURNING id", params or ())
-    row_id = cur.fetchone()[0]
+    # RETURNING * gives us all columns; we take the first one which is always the PK
+    cur.execute(query + " RETURNING *", params or ())
+    row = cur.fetchone()
+    row_id = row[0] if row else None
     con.commit()
     cur.close()
     con.close()
