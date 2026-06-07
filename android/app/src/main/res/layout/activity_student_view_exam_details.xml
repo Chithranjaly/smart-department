@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A9E465"
+    android:orientation="vertical"
+    tools:context=".Parent_view_exam_dates">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Exam Details" />
+
+    <ListView
+        android:id="@+id/lvexam"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

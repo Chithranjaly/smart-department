@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.eschool">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ESchool"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Student_view_timetable"></activity>
+        <activity android:name=".Student_message_staff" />
+        <activity android:name=".Student_view_stdy_materials" />
+        <activity android:name=".Parent_make_payment" />
+        <activity android:name=".Parent_view_fees" />
+        <activity android:name=".Student_view_marklist" />
+        <activity android:name=".Student_view_attendance" />
+        <activity android:name=".Parent_view_marklist" />
+        <activity android:name=".Parent_view_attendance" />
+        <activity android:name=".Student_view_exam_details" />
+        <activity android:name=".Parent_view_exam_dates" />
+        <activity android:name=".Parent_view_students" />
+        <activity android:name=".Student_home" />
+        <activity android:name=".Parent_home" />
+        <activity android:name=".Login" />
+        <activity android:name=".IPSetting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

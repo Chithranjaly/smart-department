@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A9E465"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:hint="Card Number"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:hint="CVV"
+        android:ems="10" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:gravity="center" >
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="MM"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:text="/"
+
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="60dp"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:layout_height="wrap_content"
+            android:hint="YY"
+            android:ems="10" />
+
+    </TableRow>
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:hint="Card Holder Name"
+        android:layout_marginTop="10dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Amount"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:layout_marginTop="10dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Pay" />
+
+</LinearLayout>

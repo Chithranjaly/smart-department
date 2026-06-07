@@ -103,8 +103,8 @@ All endpoints accept GET or POST. Parameters are passed as query strings.
 - Send notifications to all users
 
 ### Staff Portal
-- Register parents and students (auto-sends login credentials via email)
-- Manage and view student attendance (parents are notified by email when a student is absent)
+- Register parents and students (auto-sends login credentials via email — requires SMTP credentials in environment variables)
+- Manage and view student attendance (parents are notified by email when a student is absent — requires SMTP credentials in environment variables)
 - Schedule exams and update student marks
 - View and reply to messages from students
 
@@ -124,7 +124,7 @@ All endpoints accept GET or POST. Parameters are passed as query strings.
 |-------------|------------------------------|
 | Backend     | Python 3.10+, Flask 3.0      |
 | Database    | PostgreSQL (via psycopg2)    |
-| Email       | Gmail SMTP (via smtplib)     |
+| Email       | Gmail SMTP (via smtplib) — disabled on free tier     |
 | Deployment  | Railway / Render (Gunicorn)  |
 | Mobile      | Android (Java), Volley HTTP  |
 | Frontend    | Jinja2 templates, Bootstrap  |
@@ -184,6 +184,8 @@ Visit `http://localhost:5000`
 | `MAIL_USERNAME`| Gmail address used to send credential emails        |
 | `MAIL_PASSWORD`| Gmail App Password (not your regular password)      |
 
+> **Note on email in the live demo:** Render's free tier blocks outbound SMTP connections. Email notifications are fully implemented in the code but disabled on the live demo. To enable locally, configure `MAIL_USERNAME` and `MAIL_PASSWORD` in your `.env` file. In a production environment, a transactional email service such as SendGrid would be used instead.
+
 ---
 
 ## Deployment (Render)
@@ -229,3 +231,49 @@ The Android app (in the `/Android` folder of the original project) connects to t
 ## License
 
 This project was developed as an academic final-year project. Feel free to use it as a reference.
+
+---
+
+## Android App Setup
+
+The Android companion app is for **students and parents**. It connects to the live Flask API.
+
+### Download & Install
+1. Download the APK from the [`android/app-debug.apk`](android/app-debug.apk) file in this repo
+2. Transfer it to your Android device
+3. Enable **"Install from unknown sources"** in your device settings
+4. Install the APK
+
+### Connect to the Live Server
+1. Open the app — it will show an **IP Settings** screen first
+2. Enter the live server URL:
+   ```
+   https://smart-department.onrender.com
+   ```
+3. Tap **Save** and proceed to login
+
+### Login as Student or Parent
+Use the credentials created by staff via the Staff Portal. Sample credentials from the demo database:
+
+| Role | Username | Password |
+|------|----------|----------|
+| Student | `s1` | `s1` |
+| Parent | `p1` | `p1` |
+
+### Features Available in the App
+
+**Students:**
+- View attendance records
+- View exam schedule and marks
+- View timetable
+- Download study materials
+- Message staff and view replies
+
+**Parents:**
+- View their children's profiles
+- View attendance and marks
+- View exam dates and fee details
+- Make fee payments
+
+### Source Code
+The full Android source code (Java) is in the [`android/`](android/) folder of this repository.
