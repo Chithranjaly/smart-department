@@ -7,6 +7,91 @@ A full-stack web application built with Python Flask and PostgreSQL for managing
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
 ![Android](https://img.shields.io/badge/Android-Java-green?logo=android)
 
+🌐 **Live Demo:** [https://smart-department.onrender.com](https://smart-department.onrender.com)
+
+> **Note:** The app is hosted on Render's free tier and may take 30–60 seconds to wake up on the first visit.
+
+---
+
+## Demo Credentials & Endpoints
+
+Use these to explore the live demo without setting anything up locally.
+
+### Admin Portal
+| | |
+|---|---|
+| **Login URL** | [/public_login](https://smart-department.onrender.com/public_login) |
+| **Username** | `admin` |
+| **Password** | `admin` |
+
+| Endpoint | Description |
+|----------|-------------|
+| `/admin/admin_home` | Admin dashboard |
+| `/admin/admin_manage_batches` | Add, edit, delete batches |
+| `/admin/admin_manage_subjects` | Manage subjects per batch |
+| `/admin/admin_manage_timetable` | Build timetables |
+| `/admin/admin_manage_staff` | Register and manage staff |
+| `/admin/admin_manage_fees` | Set fee amounts and due dates |
+| `/admin/admin_manage_notification` | Send notifications |
+| `/admin/admin_view_students1` | Browse students by batch |
+| `/admin/admin_view_reports` | Reports overview |
+| `/admin/admin_view_attendance_report` | Full attendance report |
+| `/admin/admin_view_mark_report` | Full marks report |
+| `/admin/admin_view_payments_report` | Full payments report |
+| `/admin/admin_view_students_report` | Full student list report |
+
+---
+
+### Staff Portal
+| | |
+|---|---|
+| **Login URL** | [/public_login](https://smart-department.onrender.com/public_login) |
+| **Username** | `staff` |
+| **Password** | `staff` |
+
+| Endpoint | Description |
+|----------|-------------|
+| `/staff/staff_home` | Staff dashboard |
+| `/staff/staff_manage_parents` | Register and manage parents |
+| `/staff/staff_manage_students` | Register and manage students |
+| `/staff/staff_manage_attendance` | Mark and update attendance |
+| `/staff/staff_scheduling_exams1` | Schedule exams |
+| `/staff/staff_updating_marks` | Enter and update student marks |
+| `/staff/staff_view_messages` | View and reply to student messages |
+| `/staff/staff_view_notifications` | View admin notifications |
+
+---
+
+### Student & Parent (Android API)
+Students and parents access the system via the Android companion app, which connects to the REST API below. They log in with the credentials created by staff.
+
+| Sample credentials | Username | Password |
+|---|---|---|
+| Parent | `p1` | `p1` |
+| Student | `s1` | `s1` |
+
+---
+
+### REST API Endpoints
+All endpoints accept GET or POST. Parameters are passed as query strings.
+
+| Endpoint | Parameters | Description |
+|----------|------------|-------------|
+| `/api/login` | `username`, `password` | Authenticate any user |
+| `/api/parent_view_students` | `login_id` | Get children linked to a parent |
+| `/api/parent_view_attendance` | `stid` | Get a student's attendance |
+| `/api/parent_view_marklist` | `stid` | Get a student's marks |
+| `/api/parent_view_exam_dates` | — | Get all exam schedules |
+| `/api/parent_view_fees` | — | Get fee details |
+| `/api/parent_make_payment` | `login_id`, `fee_ids`, `fee_amounts` | Record a fee payment |
+| `/api/student_view_attendance` | `login_id` | Get own attendance |
+| `/api/student_view_marklist` | `login_id` | Get own marks |
+| `/api/student_view_exam_details` | — | Get exam schedule |
+| `/api/student_view_timetable` | `login_id` | Get own timetable |
+| `/api/student_view_stdy_materials` | — | Get study materials |
+| `/api/student_message_staff` | `loginid`, `staff_id`, `messages` | Send a message to staff |
+| `/api/student_view_message_staff` | `loginid`, `staff_id` | View message thread |
+
 ---
 
 ## Features
@@ -101,10 +186,10 @@ Visit `http://localhost:5000`
 
 ---
 
-## Deployment (Railway)
+## Deployment (Render)
 
 1. Push this repo to GitHub
-2. Create a new project on [Railway](https://railway.app)
+2. Go to [Render](https://render.com) and create a PostgreSQL database
 3. Add a **PostgreSQL** plugin — Railway auto-sets `DATABASE_URL`
 4. Add your other environment variables (`SECRET_KEY`, `MAIL_USERNAME`, `MAIL_PASSWORD`)
 5. Deploy — Railway reads the `Procfile` and runs `gunicorn main:app`
