@@ -13,8 +13,11 @@ MAIL_PASS = os.environ.get("MAIL_PASSWORD")
 
 def send_email(to_address, subject, body):
     """Send an email via Gmail SMTP. Silently logs errors."""
+    if not MAIL_FROM or not MAIL_PASS:
+        print(f"Email skipped (no credentials configured): {subject} -> {to_address}")
+        return
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as gmail:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as gmail:
             gmail.ehlo()
             gmail.starttls()
             gmail.login(MAIL_FROM, MAIL_PASS)
